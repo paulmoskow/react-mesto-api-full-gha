@@ -17,6 +17,8 @@ const { PORT = 3000 } = process.env;
 const allowedCors = [
   'https://praktikum.tk',
   'http://praktikum.tk',
+  'https://paulmoskow.students.nomoredomainsmonster.ru',
+  'http://paulmoskow.students.nomoredomainsmonster.ru',
   'localhost:3000',
 ];
 
@@ -41,7 +43,6 @@ app.use(function(req, res, next) {
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
   }
-
   next();
 });
 
