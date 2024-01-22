@@ -38,9 +38,9 @@ app.get('/crash-test', () => {
 
 // allow CORS
 app.use(function(req, res, next) {
-  const { origin } = req.headers;
-  const { method } = req;
-  const DEFAULT_ALLOWED_METHODS = "GET,HEAD,PUT,PATCH,POST,DELETE";
+  const { origin, method } = req;
+  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+  const requestHeaders = req.headers['access-control-request-headers'];
 
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
@@ -48,7 +48,7 @@ app.use(function(req, res, next) {
   }
 
   if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Headers', requestHeaders);
     return res.end();
   }
 
