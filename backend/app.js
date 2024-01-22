@@ -44,11 +44,14 @@ app.use(function(req, res, next) {
 
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
   }
 
   if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Headers', DEFAULT_ALLOWED_METHODS);
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    return res.end();
   }
+
   next();
 });
 
