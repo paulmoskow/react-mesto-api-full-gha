@@ -19,7 +19,8 @@ const allowedCors = [
   'http://praktikum.tk',
   'https://paulmoskow.students.nomoredomainsmonster.ru',
   'http://paulmoskow.students.nomoredomainsmonster.ru',
-  'localhost:3000',
+  'https://localhost:3000',
+  'http://localhost:3000',
 ];
 
 const app = express();
