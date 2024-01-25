@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP <158.160.138.162>
+IP <51.250.24.251>
 
 Frontend https://paulmoskow.students.nomoredomainsmonster.ru/
 

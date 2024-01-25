@@ -15,10 +15,10 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3000 } = process.env;
 
 const allowedCors = [
-  'https://praktikum.tk',
-  'http://praktikum.tk',
   'https://paulmoskow.students.nomoredomainsmonster.ru',
   'http://paulmoskow.students.nomoredomainsmonster.ru',
+  'https://api.paulmoskow.students.nomoredomainsmonster.ru',
+  'http://api.paulmoskow.students.nomoredomainsmonster.ru',
   'https://localhost:3000',
   'http://localhost:3000',
 ];
@@ -26,7 +26,7 @@ const allowedCors = [
 const app = express();
 app.use(cookieParser());
 
-mongoose.connect('mongodb://158.160.138.162:27017/mestodb');
+mongoose.connect('mongodb://51.250.24.251:27017/mestodb');
 
 app.use(json);
 app.use(requestLogger);
