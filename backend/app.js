@@ -26,7 +26,7 @@ const allowedCors = [
 const app = express();
 app.use(cookieParser());
 
-mongoose.connect('mongodb://51.250.24.251:27017/mestodb');
+mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 
 app.use(json);
 app.use(requestLogger);
@@ -42,13 +42,14 @@ app.use(function(req, res, next) {
   const { origin, method } = req;
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   const requestHeaders = req.headers['access-control-request-headers'];
+  res.header('Access-Control-Allow-Credentials', true);
 
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
   }
 
   if (method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
     res.header('Access-Control-Allow-Headers', requestHeaders);
     return res.end();
   }
