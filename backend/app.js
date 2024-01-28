@@ -9,21 +9,17 @@ const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
+const cors = require('./middlewares/cors');
 const ValidationError = require('./errors/validation-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 
-const allowedCors = [
-  'https://paulmoskow.students.nomoredomainsmonster.ru',
-  'http://paulmoskow.students.nomoredomainsmonster.ru',
-  'https://api.paulmoskow.students.nomoredomainsmonster.ru',
-  'http://api.paulmoskow.students.nomoredomainsmonster.ru',
-  'https://localhost:3000',
-  'http://localhost:3000',
-];
-
 const app = express();
+
+// allow CORS
+app.use(cors);
+
 app.use(cookieParser());
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
@@ -35,26 +31,6 @@ app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
-});
-
-// allow CORS
-app.use(function(req, res, next) {
-  const { origin, method } = req;
-  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-  const requestHeaders = req.headers['access-control-request-headers'];
-  res.header('Access-Control-Allow-Credentials', true);
-
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
-
-  if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    res.header('Access-Control-Allow-Headers', requestHeaders);
-    return res.end();
-  }
-
-  next();
 });
 
 app.post('/signin', celebrate({
