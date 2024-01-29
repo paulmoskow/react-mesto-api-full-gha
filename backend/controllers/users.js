@@ -64,7 +64,7 @@ module.exports.login = (req, res, next) => {
           maxAge: 604800000,
           httpOnly: true,
         })
-        .end();
+        .json({ message: 'Успешная авторизация', user });
     })
     .catch((err) => {
       if (err.code === UNAUTHORIZED_ACCESS) {
