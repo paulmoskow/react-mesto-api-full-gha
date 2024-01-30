@@ -31,7 +31,7 @@ module.exports.createUser = (req, res, next) => {
       if (!user) {
         throw new ValidationError('Переданы некорректные данные при создании пользователя');
       }
-      res.status(201).send({
+      return res.status(201).send({
         _id: user._id,
         email: user.email,
         name: user.name,
@@ -59,7 +59,7 @@ module.exports.login = (req, res, next) => {
         'some-secret-key',
         { expiresIn: '7d' },
       );
-      res
+      return res
         .cookie('jwt', token, {
           maxAge: 604800000,
           httpOnly: true,
@@ -82,7 +82,7 @@ module.exports.getUserById = (req, res, next) => {
         throw new NotFoundError('Пользователь не найден');
       }
       try {
-        res.status(200).send({ data: user });
+        return res.status(200).send({ data: user });
       } catch (err) {
         if (err instanceof ValidationError) {
           throw new ValidationError('Переданы некорректные данные при создании пользователя');
@@ -99,7 +99,7 @@ module.exports.getUserData = (req, res, next) => {
         throw new NotFoundError('Пользователь не найден');
       }
       try {
-        res.status(200).send({ data: user });
+        return res.status(200).send({ data: user });
       } catch (err) {
         if (err instanceof ValidationError) {
           throw new ValidationError('Переданы некорректные данные при создании пользователя');
@@ -123,7 +123,7 @@ module.exports.updateUserProfile = (req, res, next) => {
         throw new NotFoundError('Пользователь не найден');
       }
       try {
-        res.status(200).send({ data: user });
+        return res.status(200).send({ data: user });
       } catch (err) {
         if (err instanceof ValidationError) {
           throw new ValidationError('Переданы некорректные данные при создании пользователя');
@@ -147,7 +147,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
         throw new NotFoundError('Пользователь не найден');
       }
       try {
-        res.status(200).send({ data: user });
+        return res.status(200).send({ data: user });
       } catch (err) {
         if (err instanceof ValidationError) {
           throw new ValidationError('Переданы некорректные данные при создании пользователя');

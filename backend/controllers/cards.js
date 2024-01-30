@@ -5,7 +5,9 @@ const Forbidden = require('../errors/forbidden');
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .then((cards) => res.send({ data: cards }))
+    .then((cards) => {
+      return res.send({ data: cards });
+    })
     .catch(next);
 };
 
@@ -19,7 +21,7 @@ module.exports.createCard = (req, res, next) => {
       if (!card) {
         throw new ValidationError('Переданы некорректные данные при создании карточки');
       }
-      res.status(201).send({ data: card });
+      return res.status(201).send({ data: card });
     })
     .catch(next);
 };
@@ -39,7 +41,7 @@ module.exports.deleteCard = (req, res, next) => {
           if (!card) {
             throw new NotFoundError('Карточка не найдена');
           }
-          res.status(200).send({ data: card });
+          return res.status(200).send({ data: card });
         });
     })
     .catch(next);
@@ -54,7 +56,7 @@ module.exports.likeCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Карточка не найдена');
       }
-      res.status(200).send({ data: card });
+      return res.status(200).send({ data: card });
     })
     .catch(next);
 };
@@ -68,7 +70,7 @@ module.exports.dislikeCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Карточка не найдена');
       }
-      res.status(200).send({ data: card });
+      return res.status(200).send({ data: card });
     })
     .catch(next);
 };
