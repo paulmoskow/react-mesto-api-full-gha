@@ -59,7 +59,7 @@ module.exports.login = (req, res, next) => {
         'some-secret-key',
         { expiresIn: '7d' },
       );
-      return res.status(200).send({ token })
+      return res.status(200).send({ token });
       // return res
       //  .cookie('jwt', token, {
       //    maxAge: 604800000,
