@@ -59,12 +59,13 @@ module.exports.login = (req, res, next) => {
         'some-secret-key',
         { expiresIn: '7d' },
       );
-      return res
-        .cookie('jwt', token, {
-          maxAge: 604800000,
-          httpOnly: true,
-        })
-        .json({ message: 'Успешная авторизация', user });
+      return res.status(200).send({ token })
+      // return res
+      //  .cookie('jwt', token, {
+      //    maxAge: 604800000,
+      //    httpOnly: true,
+      //  })
+      //  .json({ message: 'Успешная авторизация', user });
     })
     .catch((err) => {
       if (err.code === UNAUTHORIZED_ACCESS) {
