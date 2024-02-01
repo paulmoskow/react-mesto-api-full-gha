@@ -12,7 +12,7 @@ const UNAUTHORIZED_ACCESS = 401;
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.status(200).send({ data: users }))
+    .then((users) => res.status(200).send(users))
     .catch(next);
 };
 
@@ -83,7 +83,7 @@ module.exports.getUserById = (req, res, next) => {
         throw new NotFoundError('Пользователь не найден');
       }
       try {
-        return res.status(200).send({ data: user });
+        return res.status(200).send(user);
       } catch (err) {
         if (err instanceof ValidationError) {
           throw new ValidationError('Переданы некорректные данные при создании пользователя');
@@ -100,7 +100,7 @@ module.exports.getUserData = (req, res, next) => {
         throw new NotFoundError('Пользователь не найден');
       }
       try {
-        return res.status(200).send({ data: user });
+        return res.status(200).send(user);
       } catch (err) {
         if (err instanceof ValidationError) {
           throw new ValidationError('Переданы некорректные данные при создании пользователя');
@@ -124,7 +124,7 @@ module.exports.updateUserProfile = (req, res, next) => {
         throw new NotFoundError('Пользователь не найден');
       }
       try {
-        return res.status(200).send({ data: user });
+        return res.status(200).send(user);
       } catch (err) {
         if (err instanceof ValidationError) {
           throw new ValidationError('Переданы некорректные данные при создании пользователя');
@@ -148,7 +148,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
         throw new NotFoundError('Пользователь не найден');
       }
       try {
-        return res.status(200).send({ data: user });
+        return res.status(200).send(user);
       } catch (err) {
         if (err instanceof ValidationError) {
           throw new ValidationError('Переданы некорректные данные при создании пользователя');

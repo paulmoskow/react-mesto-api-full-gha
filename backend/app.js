@@ -4,12 +4,13 @@ const router = require('express').Router();
 const json = require('express').json();
 const cookieParser = require('cookie-parser');
 const { errors, celebrate, Joi } = require('celebrate');
+const cors = require('cors');
 
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
-const cors = require('./middlewares/cors');
+// const cors = require('./middlewares/cors');
 const ValidationError = require('./errors/validation-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -18,13 +19,22 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 // allow CORS
-app.use(cors);
+app.use(cors({
+  origin: [
+    'https://paulmoskow.students.nomoredomainsmonster.ru',
+    'http://paulmoskow.students.nomoredomainsmonster.ru',
+    'https://api.paulmoskow.students.nomoredomainsmonster.ru',
+    'http://api.paulmoskow.students.nomoredomainsmonster.ru',
+    'https://localhost:3000',
+    'http://localhost:3000',
+  ],
+}));
 
 app.use(cookieParser());
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 
-app.use(json());
+app.use(json);
 app.use(requestLogger);
 
 app.get('/crash-test', () => {
