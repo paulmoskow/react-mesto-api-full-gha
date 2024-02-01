@@ -19,16 +19,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 // allow CORS
-app.use(cors({
-  origin: [
-    'https://paulmoskow.students.nomoredomainsmonster.ru',
-    'http://paulmoskow.students.nomoredomainsmonster.ru',
-    'https://api.paulmoskow.students.nomoredomainsmonster.ru',
-    'http://api.paulmoskow.students.nomoredomainsmonster.ru',
-    'https://localhost:3000',
-    'http://localhost:3000',
-  ],
-}));
+app.use(cors());
 
 app.use(cookieParser());
 
