@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const router = require('express').Router();
@@ -13,6 +14,7 @@ const auth = require('./middlewares/auth');
 // const cors = require('./middlewares/cors');
 const ValidationError = require('./errors/validation-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { DB_ADDRESS } = require('./config');
 
 const { PORT = 3000 } = process.env;
 
@@ -29,7 +31,7 @@ app.use(cors({
 
 app.use(cookieParser());
 
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
+mongoose.connect(DB_ADDRESS);
 
 app.use(json);
 app.use(requestLogger);

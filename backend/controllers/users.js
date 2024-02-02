@@ -6,6 +6,7 @@ const ValidationError = require('../errors/validation-err');
 const Conflict = require('../errors/conflict');
 const UnauthorizedAccess = require('../errors/unauthorizedaccess');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
 const MONGO_DUPLICATE_ERROR_CODE = 11000;
 const SOLT_ROUND = 10;
 const UNAUTHORIZED_ACCESS = 401;
@@ -56,7 +57,7 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        'some-secret-key',
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
       return res.status(200).send({ token });
